@@ -5,4 +5,5 @@ Cose fatte:
     
 Da fare:
 
-    Sezione filtri      
+    Sezione filtri
+    Barra progresso
