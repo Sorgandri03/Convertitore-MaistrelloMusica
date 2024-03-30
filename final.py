@@ -1,4 +1,4 @@
-#Versione 0.70 20/3/2024
+#Versione 0.80 30/3/2024
 
 import customtkinter
 from CTkTable import *
@@ -257,12 +257,9 @@ class App(customtkinter.CTk):
                                                 f.write(line)
                         f.close
                         
-                        v=0
-                        for i in CTkTable.get(self.table):
-                                i = str(i).replace("[","").replace("]","").replace(" '","").replace("'","").replace("\\n","")
-                                if i == rigapulita:
-                                        CTkTable.delete_row(self.table,v)
-                                v+=1
+                        self.table = CTkTable(master=self.frame, column=6, values=self.get_values())
+                        self.table.grid(row=1,column=0)
+                        self.row_selector = CTkTableRowSelector(self.table, selected_row_color="dark blue", can_select_headers=True, max_selection=1)
                 
 
 
