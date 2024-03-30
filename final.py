@@ -314,17 +314,17 @@ class App(customtkinter.CTk):
                                         indice=genere.index(g)
                                         if "%" in prezzog[indice]:                                                
                                                 percent=(float(prezzog[indice].removesuffix("%"))/100)+1
-                                                df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.01)
+                                                df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
                                         else:
-                                                df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.01)
+                                                df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
                         for c in codice:
                                 if c==df.at[i,'codart']:
                                         indice=codice.index(c)
                                         if "%" in prezzoc[indice]:
                                                 percent=(float(prezzoc[indice].removesuffix("%"))/100)+1
-                                                df.at[i,'prezzov'] = (round(float(prezzoorigc[indice])*percent)-0.01)
+                                                df.at[i,'prezzov'] = (round(float(prezzoorigc[indice])*percent)-0.10)
                                         else:
-                                                df.at[i,'prezzov'] = (round(float(prezzoc[indice]))-0.01)
+                                                df.at[i,'prezzov'] = (round(float(prezzoc[indice]))-0.10)
 
 
                 df.drop(["eanc", "titolo", "titolopos", "codpos", "codsup", "anno", "codcant", "desccant", "codinterp", "codgenere", "codlinea", "codfor", "catalogo", "codiva", "codum", "confezione", "ricarica", "fuoricat", "datains", "datamod", "datasospo", "datafass", "indtipocp", "videof", "audiof", "codlineafor", "prezzoa", "iva", "ricaricar", "marginer", "datainizio", "datafine"], axis=1, inplace= True)
