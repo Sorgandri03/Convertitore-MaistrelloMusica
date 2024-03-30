@@ -1,9 +1,10 @@
 Cose fatte:
 
     Interfaccia grafica
-    Arrotondamento a .99
+    Arrotondamento a .90
+    Filtri
     
 Da fare:
 
-    Sezione filtri
+    Discogs
     Barra progresso
