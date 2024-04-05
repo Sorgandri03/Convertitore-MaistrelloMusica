@@ -1,0 +1,2 @@
+pyinstaller .\final.py -F --noconsole
+

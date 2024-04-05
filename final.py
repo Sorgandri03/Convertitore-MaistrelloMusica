@@ -1,4 +1,4 @@
-#Versione 0.80 30/3/2024
+#Versione 0.81 5/4/2024
 
 import customtkinter
 from CTkTable import *
@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter.messagebox import askquestion
 import pandas as pd
 import pyexcel as p
+import pyexcel_io.writers
 import pyexcel_xls
 import pyexcel_xlsx
 import os
@@ -256,9 +257,11 @@ class App(customtkinter.CTk):
                                         if line.strip("\n") != rigapulita:
                                                 f.write(line)
                         f.close
+
+                        self.table.destroy()
                         
-                        self.table = CTkTable(master=self.frame, column=6, values=self.get_values())
-                        self.table.grid(row=1,column=0)
+                        self.table = CTkTable(master=self.frame_right, column=6, values=self.get_values())
+                        self.table.pack(expand=True, fill="both")
                         self.row_selector = CTkTableRowSelector(self.table, selected_row_color="dark blue", can_select_headers=True, max_selection=1)
                 
 
@@ -350,7 +353,7 @@ class App(customtkinter.CTk):
                 df = df.rename(columns={'codart':'sku','ean':'product-id', 'prezzov':'price', 'esist':'quantity'})
                 df=df[['sku', 'product-id', 'product-id-type', 'price', 'quantity', 'state', 'logistic-class', 'discount-price', 'update-delete', 'leadtime-to-ship']]
                 
-                file_name = self.destinazione+"\OFFERTE.xlsx"
+                file_name = self.destinazione+"/OFFERTE.xlsx"
                 df.to_excel(file_name, index=False)
 
                 xl.close()
