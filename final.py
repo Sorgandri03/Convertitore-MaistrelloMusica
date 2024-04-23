@@ -1,4 +1,4 @@
-#Versione 0.81 5/4/2024
+#Versione 0.82 23/4/2024
 
 import customtkinter
 from CTkTable import *
@@ -213,7 +213,7 @@ class App(customtkinter.CTk):
                 self.frame_right.grid_forget()
                 self.frame_bottom.grid_forget()
                 self.home_frame.grid(row=0, column=1, padx=(0, 0), pady=(0, 0), sticky="nsew")
-        
+
         def Filtri(self):
                 self.geometry(f"{1037}x{453}")
                 self.home_frame.grid_forget()
@@ -308,18 +308,19 @@ class App(customtkinter.CTk):
                                 prezzog.append(filtroattuale[5].removesuffix("\n"))
                         else:
                                 codice.append(filtroattuale[0])
-                                prezzoorigc.append(filtroattuale[4])                     
+                                prezzoorigc.append(filtroattuale[4])
                                 prezzoc.append(filtroattuale[5].removesuffix("\n"))
 
                 for i, row in df.iterrows():
                         for g in genere:
                                 if g==df.at[i,'codgenere']:
                                         indice=genere.index(g)
-                                        if "%" in prezzog[indice]:                                                
-                                                percent=(float(prezzog[indice].removesuffix("%"))/100)+1
-                                                df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
-                                        else:
-                                                df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
+                                        if float(prezzoorigg[indice]) == float(df.at[i,'prezzov']):
+                                                if "%" in prezzog[indice]:                                                
+                                                        percent=(float(prezzog[indice].removesuffix("%"))/100)+1
+                                                        df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
+                                                else:
+                                                        df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
                         for c in codice:
                                 if c==df.at[i,'codart']:
                                         indice=codice.index(c)
