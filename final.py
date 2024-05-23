@@ -1,4 +1,4 @@
-#Versione 0.82 23/4/2024
+#Versione 0.83 23/5/2024
 
 import customtkinter
 from CTkTable import *
@@ -288,7 +288,7 @@ class App(customtkinter.CTk):
                 for i, row in df.iterrows():
                         df.at[i,'codart'] = a="{:05d}".format(row[0])
                         df.at[i,'ean'] = a="{:013d}".format(row[1])
-                        df.at[i,'prezzov'] = (round(float(row[28])*percentuale)-0.10)
+                        df.at[i,'prezzov'] = round(float(row[28]))-0.10
                         df.at[i,'codgenere'] = a ="{:03d}".format(row[11])
                         if row[33]==0:
                                 df.drop(i, inplace = True)
@@ -312,23 +312,27 @@ class App(customtkinter.CTk):
                                 prezzoc.append(filtroattuale[5].removesuffix("\n"))
 
                 for i, row in df.iterrows():
-                        for g in genere:
-                                if g==df.at[i,'codgenere']:
-                                        indice=genere.index(g)
-                                        if float(prezzoorigg[indice]) == float(df.at[i,'prezzov']):
-                                                if "%" in prezzog[indice]:                                                
-                                                        percent=(float(prezzog[indice].removesuffix("%"))/100)+1
-                                                        df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
-                                                else:
-                                                        df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
-                        for c in codice:
-                                if c==df.at[i,'codart']:
-                                        indice=codice.index(c)
-                                        if "%" in prezzoc[indice]:
-                                                percent=(float(prezzoc[indice].removesuffix("%"))/100)+1
-                                                df.at[i,'prezzov'] = (round(float(prezzoorigc[indice])*percent)-0.10)
+
+                        if df.at[i,'codart'] in codice:
+                                indice=codice.index(df.at[i,'codart'])
+                                if "%" in prezzoc[indice]:
+                                        percent=(float(prezzoc[indice].removesuffix("%"))/100)+1
+                                        df.at[i,'prezzov'] = (round(float(prezzoorigc[indice])*percent)-0.10)
+                                else:
+                                        df.at[i,'prezzov'] = (round(float(prezzoc[indice]))-0.10)
+
+                        elif df.at[i,'codgenere'] in genere:
+                                indice=genere.index(df.at[i,'codgenere'])
+                                if float(prezzoorigg[indice]) == float(df.at[i,'prezzov']):
+                                        if "%" in prezzog[indice]:                                                
+                                                percent=(float(prezzog[indice].removesuffix("%"))/100)+1
+                                                df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
                                         else:
-                                                df.at[i,'prezzov'] = (round(float(prezzoc[indice]))-0.10)
+                                                df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
+                        else:   
+                                df.at[i,'prezzov'] = (round(float(row[28])*percentuale)-0.10)
+                                
+                                
 
 
                 df.drop(["eanc", "titolo", "titolopos", "codpos", "codsup", "anno", "codcant", "desccant", "codinterp", "codgenere", "codlinea", "codfor", "catalogo", "codiva", "codum", "confezione", "ricarica", "fuoricat", "datains", "datamod", "datasospo", "datafass", "indtipocp", "videof", "audiof", "codlineafor", "prezzoa", "iva", "ricaricar", "marginer", "datainizio", "datafine"], axis=1, inplace= True)
