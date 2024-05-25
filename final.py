@@ -1,4 +1,4 @@
-#Versione 0.83 23/5/2024
+#Versione 0.84 25/5/2024
 
 import customtkinter
 from CTkTable import *
@@ -323,12 +323,14 @@ class App(customtkinter.CTk):
 
                         elif df.at[i,'codgenere'] in genere:
                                 indice=genere.index(df.at[i,'codgenere'])
-                                if float(prezzoorigg[indice]) == float(df.at[i,'prezzov']):
+                                if round(float(prezzoorigg[indice]))-0.10 == float(df.at[i,'prezzov']):
                                         if "%" in prezzog[indice]:                                                
                                                 percent=(float(prezzog[indice].removesuffix("%"))/100)+1
                                                 df.at[i,'prezzov'] = (round(float(prezzoorigg[indice])*percent)-0.10)
                                         else:
                                                 df.at[i,'prezzov'] = (round(float(prezzog[indice]))-0.10)
+                                else:
+                                        df.at[i,'prezzov'] = (round(float(row[28])*percentuale)-0.10)
                         else:   
                                 df.at[i,'prezzov'] = (round(float(row[28])*percentuale)-0.10)
                                 
