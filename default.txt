@@ -1,2 +1,2 @@
-C:/Users/throa/OneDrive - Universita' degli Studi dell'Aquila/PROGRAMMA PAOLO/stampa articoli.xls
-C:/Users/throa/OneDrive - Universita' degli Studi dell'Aquila/PROGRAMMA PAOLO
+/Volumes/GESTIONALE Desktop/stampa articoli.xls
+/Users/maistrellomusica/Desktop/IBS
